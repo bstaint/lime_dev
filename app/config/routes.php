@@ -13,11 +13,20 @@ $app->get('/', function(){
 
 $app->get('/form', function(){
     $html = <<<EOF
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>表单测试</title>
+    </head>
+    <body>
     <form action="%s" method="POST">
-        <input type="text" name="username"/>
-        <input type="password" name="password"/>
+        <p><span>账号：</span><input type="text" name="username"/></p>
+        <p><span>密码：</span><input type="password" name="password"/></p>
         <input type="submit" />
     </form>
+    </body>
+</html>
 EOF;
     return sprintf($html, $this->baseUrl('/valid'));
 });
