@@ -1,10 +1,22 @@
 <?php if(!defined('__BASE_DIR__')) exit('403');
 
 $app->get('/', function(){
-    return sprintf('Hello World<br />'.
-        '<p><a href="%s">QR二维码测试</a> [使用endroid/QrCode]</p>'.
-        '<p><a href="%s">表单验证</a> [使用php-simple-form-validation]</p>'.
-        '%smsec %s',
+    $html = <<<EOF
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>首页</title>
+    </head>
+    <body>
+    <span>Hello World</span>
+    <p><a href="%s">QR二维码测试</a> [使用endroid/QrCode]</p>
+    <p><a href="%s">表单验证</a> [使用php-simple-form-validation]</p>
+    <p>%smsec, %s</p>
+    </body>
+</html>
+EOF;
+    return sprintf($html,
         $this->baseUrl('/qrcode'),
         $this->baseUrl('/form'),
         $this->elapsed_time, $this->memory_usage
