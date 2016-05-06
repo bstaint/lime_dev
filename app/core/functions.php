@@ -2,12 +2,15 @@
 
 // 脚本执行时间
 $app->service('elapsed_time', function() use($app){
-    return number_format(microtime(TRUE) - $app['config.begin_point'], 4);
+    list($sm, $ss) = explode(' ', $app['config.begin_point']);
+    list($em, $es) = explode(' ', microtime());
+
+    return number_format(($em + $es) - ($sm + $ss), 2);
 });
 
 // 脚本运行内存
 $app->service('memory_usage', function(){
-    return round(memory_get_usage() / 1024 / 1024, 2).'MB';
+    return  ( ! function_exists('memory_get_usage')) ? '0' : round(memory_get_usage()/1024/1024, 2).'MB'; 
 });
 
 // 获取GET数组

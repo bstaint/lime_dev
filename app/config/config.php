@@ -12,6 +12,12 @@ $app['session.name'] = 'LIMESESSION';
 $pathinfo = route_url($app['base_url']);
 $app['route'] = empty($pathinfo) ? '/' : $pathinfo;
 
-$app['config.begin_point'] = microtime(TRUE);
+$app['config.begin_point'] = microtime();
+
+//二维码生成库
+$app->service("qrcode", function(){
+    $obj = new Endroid\QrCode\QrCode();
+    return $obj;
+});
 
 ?>
